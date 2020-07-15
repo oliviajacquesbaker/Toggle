@@ -6,22 +6,29 @@ public class AIGenerator : MonoBehaviour
 {
     public GameObject enemyPrefab;
     private GameObject player;
-    WaitForSeconds wfs = new WaitForSeconds(2f);
+    WaitForSeconds wfs = new WaitForSeconds(1.8f);
     private float xPos, yPos;
     private float[][] spawnAreas;
-    private int enemyCount;
+    private bool spawning;
+
+    private void Awake()
+    {
+        gameObject.tag = "spawner";
+    }
+
     void Start()
     {
         spawnAreas = new float[3][];
         SetRange();
         player = GameObject.FindGameObjectWithTag("player");
+        spawning = true;//only for testing, this needs to be FALSE
 
         StartCoroutine("SpawnEnemy");
     }
 
     IEnumerator SpawnEnemy()
     {
-        while (true)
+        while (spawning)
         {
             SetPos();
             Vector3 pos = new Vector3(xPos, yPos, 0);
@@ -47,5 +54,15 @@ public class AIGenerator : MonoBehaviour
         if (area == 3) { area = 2; }
         xPos = Random.Range(spawnAreas[area][0], spawnAreas[area][1]);
         yPos = Random.Range(spawnAreas[area][2], spawnAreas[area][3]);
+    }
+
+    public void StartSpawning()
+    {
+        spawning = true;
+    }
+
+    public void StopSpawning()
+    {
+        spawning = false;
     }
 }

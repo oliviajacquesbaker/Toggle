@@ -9,6 +9,7 @@ public class ProjectileM_F : MonoBehaviour
     private float nextFireTime;
     [SerializeField]
     private float period;
+    private bool gameActive;
 
     void Start()
     {
@@ -17,18 +18,32 @@ public class ProjectileM_F : MonoBehaviour
         projectileTrigger.layer = 9;
 
         nextFireTime = 0.0f;
+        gameActive = true; //only for testing, this needs to be FALSE
     }
 
     
     void Update()
     {
-        if (Time.time >= nextFireTime)
+        if (gameActive)
         {
-            if (Input.GetMouseButton(0))
+            if (Time.time >= nextFireTime)
             {
-                projectileTrigger.FireProjectile();
-                nextFireTime = Time.time + period;
+                if (Input.GetMouseButton(0))
+                {
+                    projectileTrigger.FireProjectile();
+                    nextFireTime = Time.time + period;
+                }
             }
         }
+    }
+
+    public void Disable()
+    {
+        gameActive = false;
+    }
+
+    public void Enable()
+    {
+        gameActive = true;
     }
 }

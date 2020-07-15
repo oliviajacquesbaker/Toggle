@@ -5,6 +5,7 @@ using UnityEngine;
 public class CapturePoint : MonoBehaviour
 {
     private ScoreKeeper scoreKeeper;
+    private GameManager gameManager;
     private Rigidbody2D rigidBody;
     private GameObject player;
     private SpriteRenderer sprite;
@@ -16,13 +17,14 @@ public class CapturePoint : MonoBehaviour
     void Start()
     {
         scoreKeeper = (ScoreKeeper)ScoreKeeper.Instance;
+        gameManager = (GameManager)GameManager.Instance;
         rigidBody = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("player");
         sprite = GetComponent<SpriteRenderer>();
         green = new Color(162/255.0f, 241/255.0f, 194/255.0f,1);
         red = new Color(241/255.0f, 162/255.0f, 162/255.0f,1);
         rigidBody.isKinematic = true;
-        goalTime = 350;
+        goalTime = 400;
     }
 
     void Update()
@@ -70,6 +72,7 @@ public class CapturePoint : MonoBehaviour
     {
         Destroy(gameObject);
         scoreKeeper.CapturePoint();
+        gameManager.SpawnCapturePoint();
     }
 
 }

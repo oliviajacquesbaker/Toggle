@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public float speed;
     private bool invincible;
 
+    private GameManager gameManager;
+
     private void Awake()
     {
         gameObject.tag = "player";
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        gameManager = (GameManager)GameManager.Instance;
         invincible = false;
     }
     void FixedUpdate()
@@ -44,7 +47,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!invincible)
         {
-            Destroy(gameObject);
+            gameManager.SendMessage("EndGame");
+            gameObject.GetComponent<Renderer>().enabled = false;
         }
     }
 
