@@ -6,19 +6,29 @@ public class ProjectileM_F : MonoBehaviour
 {
     private ProjectileTrigger projectileTrigger;
 
+    private float nextFireTime;
+    [SerializeField]
+    private float period;
+
     void Start()
     {
         projectileTrigger = GetComponent<ProjectileTrigger>();
         projectileTrigger.speed = 5;
         projectileTrigger.layer = 9;
+
+        nextFireTime = 0.0f;
     }
 
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Time.time >= nextFireTime)
         {
-            projectileTrigger.FireProjectile();
+            if (Input.GetMouseButton(0))
+            {
+                projectileTrigger.FireProjectile();
+                nextFireTime = Time.time + period;
+            }
         }
     }
 }

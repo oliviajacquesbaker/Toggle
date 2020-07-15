@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour
     {
         gameObject.tag = "enemy";
         gameObject.layer = 10;
+        invincible = false;
     }
     void Start()
     {
@@ -33,7 +34,6 @@ public class EnemyController : MonoBehaviour
 
         projectileTrigger.speed = 4;
         projectileTrigger.layer = 10;
-        invincible = false;
         SetSpeed();
         SetDistance();
         SetRange();

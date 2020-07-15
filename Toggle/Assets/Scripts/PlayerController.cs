@@ -57,4 +57,9 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    public bool isInvincible()
+    {
+        return invincible;
+    }
 }
