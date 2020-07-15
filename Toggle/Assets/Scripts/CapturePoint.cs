@@ -13,6 +13,8 @@ public class CapturePoint : MonoBehaviour
     private float captureTime;
     private bool onTarget;
 
+    public float captureProgress { get => captureTime / goalTime; }
+
     void Start()
     {
         scoreKeeper = (ScoreKeeper)ScoreKeeper.Instance;
@@ -25,7 +27,7 @@ public class CapturePoint : MonoBehaviour
         goalTime = 350;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (captureTime >= goalTime)
         {
