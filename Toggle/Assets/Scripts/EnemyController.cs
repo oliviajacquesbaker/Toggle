@@ -8,6 +8,12 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D rigidBody;
     private ProjectileTrigger projectileTrigger;
     private GameObject target;
+    [SerializeField]
+    private Sprite vulnerableSprite;
+    [SerializeField]
+    private Sprite invincibleSprite;
+
+    private SpriteRenderer spriteRenderer;
 
     public float speed;
     private bool inRange;
@@ -24,6 +30,7 @@ public class EnemyController : MonoBehaviour
         gameObject.tag = "enemy";
         gameObject.layer = 10;
         invincible = false;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     void Start()
     {
@@ -31,6 +38,7 @@ public class EnemyController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("player");
         projectileTrigger = GetComponent<ProjectileTrigger>();
+        
 
         projectileTrigger.speed = 4;
         projectileTrigger.layer = 10;
@@ -76,9 +84,17 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void ToggleInvincibility()
+    public void ToggleInvincibility()
     {
         invincible = !invincible;
+        if (invincible)
+        {
+            spriteRenderer.sprite = invincibleSprite;
+        }
+        else
+        {
+            spriteRenderer.sprite = vulnerableSprite;
+        }
     }
 
     void Follow()

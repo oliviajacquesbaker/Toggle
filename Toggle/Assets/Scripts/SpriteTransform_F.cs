@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class SpriteTransform_F : MonoBehaviour
 {
+    private Rigidbody2D rigidBody;
+
+    private void Start()
+    {
+        rigidBody = GetComponent<Rigidbody2D>();
+    }
     void Update()
     {
         Vector2 mousePos = Input.mousePosition;
@@ -13,6 +19,10 @@ public class SpriteTransform_F : MonoBehaviour
         float yDir = mousePos.y - transform.position.y;
         Vector2 direction = new Vector2(xDir, yDir);
 
-        transform.up = direction;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        rigidBody.MoveRotation(angle - transform.rotation.z -90);
     }
+
+
 }

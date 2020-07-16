@@ -9,11 +9,16 @@ public class PlayerController : MonoBehaviour
     private string axisHorizontal;
     [SerializeField]
     private string axisVertical;
+    [SerializeField]
+    private Sprite vulnerableSprite;
+    [SerializeField]
+    private Sprite invincibleSprite;
 
     private Rigidbody2D rigidBody;
     public float speed;
     private bool invincible;
 
+    private SpriteRenderer spriteRenderer;
     private GameManager gameManager;
 
     private void Awake()
@@ -25,6 +30,7 @@ public class PlayerController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         gameManager = (GameManager)GameManager.Instance;
         invincible = false;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     void FixedUpdate()
     {
@@ -40,6 +46,14 @@ public class PlayerController : MonoBehaviour
         {
             invincible = !invincible;
             ToggleEnemyInvincibility();
+            if (invincible)
+            {
+                spriteRenderer.sprite = invincibleSprite;
+            }
+            else
+            {
+                spriteRenderer.sprite = vulnerableSprite;
+            }
         }
     }
 

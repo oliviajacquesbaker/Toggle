@@ -9,7 +9,7 @@ public class ProjectileBehavior : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        rigidBody.isKinematic = true;
+        rigidBody.isKinematic = false;
     }
 
     void Update()

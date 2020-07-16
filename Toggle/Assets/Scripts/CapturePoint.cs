@@ -10,6 +10,7 @@ public class CapturePoint : MonoBehaviour
     private GameObject player;
     private SpriteRenderer sprite;
     private Color red, green;
+    [SerializeField]
     private float goalTime;
     private float captureTime;
     private bool onTarget;
@@ -26,7 +27,6 @@ public class CapturePoint : MonoBehaviour
         green = new Color(162/255.0f, 241/255.0f, 194/255.0f,1);
         red = new Color(241/255.0f, 162/255.0f, 162/255.0f,1);
         rigidBody.isKinematic = true;
-        goalTime = 400;
     }
 
     void FixedUpdate()

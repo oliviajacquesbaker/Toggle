@@ -1,14 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     private PlayerController player;
     private AIGenerator enemySpawner;
-
-    public GameObject capPointPrefab;
+    private ScoreHolder scoreHolder;
+    [SerializeField]
+    private GameObject playerPrefab;
+    
+    
+    [SerializeField]
+    private GameObject capPointPrefab;
 
 
     void Awake()
@@ -16,6 +22,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -27,13 +34,10 @@ public class GameManager : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("player").GetComponent<PlayerController>();
         enemySpawner = GameObject.FindGameObjectWithTag("spawner").GetComponent<AIGenerator>();
-
+        scoreHolder = (ScoreHolder)ScoreHolder.Instance;
+        scoreHolder.Reset();
+        gameObject.tag = "manager";
         //countdown?
-    }
-
-    void Update()
-    {
-        
     }
 
     public void SpawnCapturePoint()
@@ -42,7 +46,7 @@ public class GameManager : MonoBehaviour
         Instantiate(capPointPrefab,pos, Quaternion.identity);
     }
 
-    void StartGame()
+    public void StartGame()
     {
         EnablePlayer();
         enemySpawner.StartSpawning();
@@ -55,7 +59,9 @@ public class GameManager : MonoBehaviour
         player.GetComponent<ProjectileM_F>().Disable();
         DisableEnemies();
         DisablePlayer();
-        //bring up end screen
+        scoreHolder.UpdateScores();
+        SceneManager.LoadScene("EndScreen");
+        
     }
 
     void EnablePlayer()
@@ -75,5 +81,18 @@ public class GameManager : MonoBehaviour
         {
             enemies[i].GetComponent<EnemyController>().enabled = false;
         }
+    }
+
+    
+
+    public void Reset()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Destroy(enemies[i]);
+        }
+        Vector3 playerPos = new Vector3(0, 0);
+        Instantiate(playerPrefab,playerPos, Quaternion.identity);
     }
 }

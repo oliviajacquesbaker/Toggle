@@ -6,10 +6,14 @@ public class AIGenerator : MonoBehaviour
 {
     public GameObject enemyPrefab;
     private GameObject player;
-    WaitForSeconds wfs = new WaitForSeconds(1.8f);
+    [SerializeField]
+    private float wfs;
+    [SerializeField]
+    private int milestone;
     private float xPos, yPos;
     private float[][] spawnAreas;
     private bool spawning;
+    private int spawnedCount;
 
     private void Awake()
     {
@@ -19,6 +23,7 @@ public class AIGenerator : MonoBehaviour
     void Start()
     {
         spawnAreas = new float[3][];
+        spawnedCount = 0;
         SetRange();
         player = GameObject.FindGameObjectWithTag("player");
         spawning = true;//only for testing, this needs to be FALSE
@@ -35,9 +40,16 @@ public class AIGenerator : MonoBehaviour
             GameObject newEnemy = Instantiate(enemyPrefab, pos, Quaternion.identity);
             if (player.GetComponent<PlayerController>().isInvincible())
             {
-                newEnemy.GetComponent<EnemyController>().invincible = true;
+                newEnemy.GetComponent<EnemyController>().ToggleInvincibility();
             }
-            yield return wfs;
+            spawnedCount++;
+
+            if(spawnedCount%milestone == 0)
+            {
+                decreaseSpawnTime();
+            }
+
+            yield return new WaitForSeconds(wfs);
         }
 
     }
@@ -64,5 +76,10 @@ public class AIGenerator : MonoBehaviour
     public void StopSpawning()
     {
         spawning = false;
+    }
+
+    public void decreaseSpawnTime()
+    {
+        wfs *= 0.8f;
     }
 }

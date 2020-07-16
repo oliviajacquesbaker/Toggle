@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScoreKeeper : MonoBehaviour
 {
     public static ScoreKeeper Instance { get; private set; }
     private int score;
-    private Text scoreText;
+    private TextMeshProUGUI scoreText;
+
 
     void Awake()
     {
@@ -23,7 +25,7 @@ public class ScoreKeeper : MonoBehaviour
     void Start()
     {
         score = 0;
-        scoreText = GetComponent<Text>();
+        scoreText = GetComponent<TextMeshProUGUI>();
         SetScoreText();
     }
 
@@ -42,6 +44,11 @@ public class ScoreKeeper : MonoBehaviour
     void SetScoreText()
     {
         scoreText.text = "Score: " + score.ToString();
+    }
+
+    public int GetScore()
+    {
+        return score;
     }
 
 }
