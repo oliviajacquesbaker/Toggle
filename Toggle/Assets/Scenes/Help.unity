@@ -436,7 +436,7 @@ MonoBehaviour:
   m_text: INSTRUCTIONS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e19c401de162a1247b247110d22d8bb1, type: 2}
-  m_sharedMaterial: {fileID: 7918186719708902911, guid: e19c401de162a1247b247110d22d8bb1,
+  m_sharedMaterial: {fileID: -3312138237606921957, guid: e19c401de162a1247b247110d22d8bb1,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -866,14 +866,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: e19c401de162a1247b247110d22d8bb1,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 3827306180388430533, guid: 29a5514340133234db1796bd80583b0c,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 7918186719708902911, guid: e19c401de162a1247b247110d22d8bb1,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 3827306180388430533, guid: 29a5514340133234db1796bd80583b0c,
         type: 3}
       propertyPath: m_Enabled
@@ -1057,7 +1055,7 @@ MonoBehaviour:
     not be continuous"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e19c401de162a1247b247110d22d8bb1, type: 2}
-  m_sharedMaterial: {fileID: 7918186719708902911, guid: e19c401de162a1247b247110d22d8bb1,
+  m_sharedMaterial: {fileID: -3312138237606921957, guid: e19c401de162a1247b247110d22d8bb1,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1211,11 +1209,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "BASIC CONTROLS:\n  -Move with WASD, shoot with RMB\n  -Toggle Invincibility
+  m_text: "BASIC CONTROLS:\n  -Move with WASD, shoot with LMB\n  -Toggle Invincibility
     with 'SPACE'\n  -Enemies are invincible when you are!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e19c401de162a1247b247110d22d8bb1, type: 2}
-  m_sharedMaterial: {fileID: 7918186719708902911, guid: e19c401de162a1247b247110d22d8bb1,
+  m_sharedMaterial: {fileID: -3312138237606921957, guid: e19c401de162a1247b247110d22d8bb1,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
